@@ -1,5 +1,8 @@
 import '../questionClass.dart';
 
+// find out answers
+// check for repeteted questions
+
 var malayalam = [
   Question(
       "സ്‌കൂള്‍ ബസുകള്‍ കുട്ടികളെ കയറ്റുന്നതിനോ ഇറക്കുന്നതിനോ നിര്‍ത്തിയിരിക്കുമ്പോള്‍",
@@ -339,8 +342,3 @@ var malayalam = [
   Question("", 0, ["", "", ""]),
   Question("", 0, ["", "", ""]),
 ];
-void main() {
-  for (int i = 0; i < malayalam.length; i++) {
-    print(malayalam[i].qstn);
-  }
-}
