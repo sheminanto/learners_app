@@ -7,8 +7,12 @@ class Signs extends StatelessWidget {
   List<Question> signs;
   List<Question> _getSigns() {
     List<Question> list = List<Question>();
-    for (int i = 133; i < 212; i++) {
-      list.add(english[i]);
+    final int len = english.length;
+
+    for (int i = 0; i < len; i++) {
+      if (english[i].img != null) {
+        list.add(english[i]);
+      }
     }
     return list;
   }
