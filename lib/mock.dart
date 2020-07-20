@@ -63,9 +63,9 @@ class _MockState extends State<Mock> {
     int q;
     for (int i = 0; i < 20; i++) {
       q = random.nextInt(english.length);
-      if(_questionIndex.contains(q))
-        while(_questionIndex.contains(q))
-          q = random.nextInt(english.length);
+//      if(_questionIndex.contains(q))
+//        while(_questionIndex.contains(q))
+//          q = random.nextInt(english.length);
       _questionIndex.add(q);
     }
   }
@@ -144,6 +144,7 @@ class _MockState extends State<Mock> {
             },),
           RaisedButton(
             child: Text("Next"),
+            color: Colors.green,
             onPressed: _answerQuestion,
           )
 
