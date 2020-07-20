@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
@@ -13,11 +14,16 @@ class Mock extends StatefulWidget {
 
 class _MockState extends State<Mock> {
   int selectedOption;
+  int count;
+  Timer _timer;
+  bool timeout = false;
 
   @override
   void initState() {
     super.initState();
     selectedOption = 0;
+    _generateQuestion();
+    _startTimer();
   }
 
   setSelectedOption(int val) {
@@ -64,15 +70,35 @@ class _MockState extends State<Mock> {
 //        while(_questionIndex.contains(q))
 //          q = random.nextInt(english.length);
       _questionIndex.add(q);
+
     }
+    print(_questionIndex);
+  }
+
+  _startTimer(){
+    print("------------Starting Timer----------------");
+    count = 10;
+    _timer = Timer(Duration(seconds: 20),_stopTimer);
+    print(_timer.tick);
+    count--;
+    print(_timer.runtimeType);
+
+  }
+  _stopTimer(){
+    print("-------------Time Elapsed-----------------");
+    setState(() {
+      _timer.cancel();
+      timeout = true;
+    });
+
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    _generateQuestion();
-    return _index < 20
+    return _index < 20 && !timeout
         ? Container(
+            padding: EdgeInsets.only(top: 5),
             child: Column(
             children: <Widget>[
               ListTile(
@@ -88,6 +114,7 @@ class _MockState extends State<Mock> {
                     'assets/images/' + english[_questionIndex[_index]].img),
               RadioListTile(
                 title: Text(english[_questionIndex[_index]].option[0]),
+                activeColor: Colors.red,
                 value: 1,
                 groupValue: selectedOption,
                 onChanged: (val) {
@@ -96,6 +123,7 @@ class _MockState extends State<Mock> {
               ),
               RadioListTile(
                 title: Text(english[_questionIndex[_index]].option[1]),
+                activeColor: Colors.red,
                 value: 2,
                 groupValue: selectedOption,
                 onChanged: (val) {
@@ -104,6 +132,7 @@ class _MockState extends State<Mock> {
               ),
               RadioListTile(
                 title: Text(english[_questionIndex[_index]].option[2]),
+                activeColor: Colors.red,
                 value: 3,
                 groupValue: selectedOption,
                 onChanged: (val) {
@@ -120,7 +149,7 @@ class _MockState extends State<Mock> {
         : Container(
             child: Center(
             child: Text(
-              "Test Completed\nYour Score : $_totalScore",
+              "Test Completed\nYour Score : $_totalScore\nStatus : "+(_totalScore < 12 ? "Failed" : "Passed"),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ));
