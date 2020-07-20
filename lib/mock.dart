@@ -66,9 +66,9 @@ class _MockState extends State<Mock> {
     int q;
     for (int i = 0; i < 20; i++) {
       q = random.nextInt(english.length);
-//      if(_questionIndex.contains(q))
-//        while(_questionIndex.contains(q))
-//          q = random.nextInt(english.length);
+      if(_questionIndex.contains(q))
+        while(_questionIndex.contains(q))
+          q = random.nextInt(english.length);
       _questionIndex.add(q);
 
     }
@@ -78,7 +78,7 @@ class _MockState extends State<Mock> {
   _startTimer(){
     print("------------Starting Timer----------------");
     count = 10;
-    _timer = Timer(Duration(seconds: 20),_stopTimer);
+    _timer = Timer(Duration(minutes: 20),_stopTimer);
     print(_timer.tick);
     count--;
     print(_timer.runtimeType);

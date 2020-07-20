@@ -165,7 +165,7 @@ var english = [
     "Show the left turn signal, keep to the left side of the road and turn to the left"
   ]),
   Question(
-      "Show the left turn signal, keep to the left side of the road and turn to the left",
+      "Validity of P.U.C.C. Pollution Under Control Certificate",
       0,
       ["6 months", "One Year", "Two years"]),
   Question(
