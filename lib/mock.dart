@@ -27,6 +27,13 @@ class _MockState extends State<Mock> {
     _startTimer();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+
+    _timer.cancel();
+  }
+
   setSelectedOption(int val) {
     setState(() {
       selectedOption = val;
@@ -60,6 +67,9 @@ class _MockState extends State<Mock> {
       setState(() {
         selectedOption = 0;
         _index++;
+        if (_index == 20) {
+          _timer.cancel();
+        }
       });
   }
 
@@ -76,21 +86,19 @@ class _MockState extends State<Mock> {
 
   void _startTimer() {
     print("------------Starting Timer----------------");
-    counter = 2;
+    counter = 60;
     if (_timer != null) {
       _timer.cancel();
     }
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (counter > 0) {
-        setState(() {
+      setState(() {
+        if (counter > 0) {
           counter--;
-        });
-      } else {
-        setState(() {
+        } else {
           _timer.cancel();
           timeout = true;
-        });
-      }
+        }
+      });
     });
   }
 
