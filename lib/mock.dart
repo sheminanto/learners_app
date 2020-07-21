@@ -95,7 +95,7 @@ class _MockState extends State<Mock> {
     // TODO: implement build
     return _index < 20 && !timeout
         ? Container(
-            color: Colors.red,
+            // color: Colors.red,
             padding: EdgeInsets.only(top: 5),
             child: Column(
               children: <Widget>[
@@ -143,7 +143,7 @@ class _MockState extends State<Mock> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      color: Colors.green,
+                      // color: Colors.green,
                       padding: EdgeInsets.all(20),
                       alignment: Alignment.center,
                       child: RaisedButton(
