@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:learners_app/main.dart';
 import 'dart:async';
 import 'dart:math';
 import 'questions/english.dart';
+import 'signs.dart';
+import 'main.dart';
 
 class Mock extends StatefulWidget {
   @override
@@ -12,19 +15,30 @@ class Mock extends StatefulWidget {
   }
 }
 
-class _MockState extends State<Mock> {
+class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
   int counter;
   int selectedOption = 0;
   int count;
   Timer _timer;
   bool timeout = false;
 
+  int _totalScore = 0;
+  int ans;
+
+  var _index = 0;
+  var random = new Random();
+  var _questionIndex = [];
+
+  // int _tabIndex = 0;
+  // TabController tabController;
+
   @override
   void initState() {
     super.initState();
-    // selectedOption = 0;
+    _showDialog();
+    // tabController = TabController(vsync: this, length: 3);
+
     _generateQuestion();
-    _startTimer();
   }
 
   @override
@@ -32,6 +46,11 @@ class _MockState extends State<Mock> {
     super.dispose();
     _timer.cancel();
   }
+
+  // void _toggleTab() {
+  //   _tabIndex = tabController.index + 1;
+  //   tabController.animateTo(1);
+  // }
 
   setSelectedOption(int val) {
     setState(() {
@@ -44,17 +63,10 @@ class _MockState extends State<Mock> {
     final scaffold = Scaffold.of(context);
     scaffold.showSnackBar(
       SnackBar(
-        content: const Text('Not selected any choice.Select one...!'),
+        content: const Text('Please select an option.'),
       ),
     );
   }
-
-  int _totalScore = 0;
-  int ans;
-
-  var _index = 0;
-  var random = new Random();
-  var _questionIndex = [];
 
   void _answerQuestion() {
     if (selectedOption - 1 == english[_questionIndex[_index]].ans)
@@ -76,8 +88,8 @@ class _MockState extends State<Mock> {
     int q;
     for (int i = 0; i < 20; i++) {
       q = random.nextInt(english.length);
-      if (_questionIndex.contains(q))
-        while (_questionIndex.contains(q)) q = random.nextInt(english.length);
+      // if (_questionIndex.contains(q))
+      while (_questionIndex.contains(q)) q = random.nextInt(english.length);
       _questionIndex.add(q);
     }
     print(_questionIndex);
@@ -86,9 +98,7 @@ class _MockState extends State<Mock> {
   void _startTimer() {
     print("------------Starting Timer----------------");
     counter = 60;
-    if (_timer != null) {
-      _timer.cancel();
-    }
+
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         if (counter > 0) {
@@ -101,8 +111,50 @@ class _MockState extends State<Mock> {
     });
   }
 
+  void _showDialog() {
+    // flutter defined function
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            // title: Text(
+            //   "Aert",
+            //   textAlign: TextAlign.center,
+            // ),
+            content: new Text("Press the button to start or cancel the test."),
+            actions: <Widget>[
+              // usually buttons at the bottom of the dialog
+
+              FlatButton(
+                color: Colors.blue,
+                child: Text("Start"),
+                onPressed: () {
+                  _startTimer();
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                color: Colors.blue,
+                child: Text("Cancel"),
+                onPressed: () {
+                  // _myappStatekey.currentState.tabController.animateTo(1);
+                  // _toggleTab();
+                },
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.30),
+            ],
+          );
+        },
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // _showDialog(context);
     // TODO: implement build
     return _index < 20 && !timeout
         ? Container(
@@ -151,7 +203,7 @@ class _MockState extends State<Mock> {
                 Container(
                   width: double.infinity,
 //                  margin: EdgeInsets.all(10),
-                  color: Colors.green,
+                  // color: Colors.green,
 //                  padding: EdgeInsets.all(20),
                   alignment: Alignment.bottomCenter,
                   child: RaisedButton(

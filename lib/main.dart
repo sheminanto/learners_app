@@ -17,29 +17,35 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyappState extends State<MyApp> {
-
-
+  static final _myappStatekey = GlobalKey<_MyappState>();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        key: _myappStatekey,
         home: DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: TabBar(
-            tabs: <Widget>[Tab(text: "Questions"), Tab(text: "Signs"),Tab(text: "Mock",)],
+          length: 3,
+          child: Scaffold(
+            appBar: AppBar(
+              bottom: TabBar(
+                tabs: <Widget>[
+                  Tab(text: "Questions"),
+                  Tab(text: "Signs"),
+                  Tab(
+                    text: "Mock",
+                  )
+                ],
+              ),
+              title: Text('Learners Guide'),
+            ),
+            body: TabBarView(
+              children: <Widget>[
+                QuestionBank(),
+                Signs(),
+                Mock(),
+              ],
+            ),
           ),
-          title: Text('Learners Guide'),
-        ),
-        body: TabBarView(
-          children: <Widget>[
-            QuestionBank(),
-            Signs(),
-            Mock(),
-          ],
-        ),
-      ),
-    ));
+        ));
   }
 }
