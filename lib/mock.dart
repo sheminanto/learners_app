@@ -30,7 +30,6 @@ class _MockState extends State<Mock> {
   @override
   void dispose() {
     super.dispose();
-
     _timer.cancel();
   }
 
