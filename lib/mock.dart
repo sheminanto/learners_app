@@ -13,6 +13,7 @@ class Mock extends StatefulWidget {
 }
 
 class _MockState extends State<Mock> {
+  int counter;
   int selectedOption = 0;
   int count;
   Timer _timer;
@@ -73,20 +74,23 @@ class _MockState extends State<Mock> {
     print(_questionIndex);
   }
 
-  _startTimer() {
+  void _startTimer() {
     print("------------Starting Timer----------------");
-    count = 10;
-    _timer = Timer(Duration(seconds: 600), _stopTimer);
-    print(_timer.tick);
-    count--;
-    print(_timer.runtimeType);
-  }
-
-  _stopTimer() {
-    print("-------------Time Elapsed-----------------");
-    setState(() {
+    counter = 2;
+    if (_timer != null) {
       _timer.cancel();
-      timeout = true;
+    }
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (counter > 0) {
+        setState(() {
+          counter--;
+        });
+      } else {
+        setState(() {
+          _timer.cancel();
+          timeout = true;
+        });
+      }
     });
   }
 
@@ -137,23 +141,40 @@ class _MockState extends State<Mock> {
                     setSelectedOption(val);
                   },
                 ),
-                Expanded(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      // color: Colors.green,
-                      padding: EdgeInsets.all(20),
-                      alignment: Alignment.center,
-                      child: RaisedButton(
-                        child: Text("Next"),
-                        color: Colors.green,
-                        onPressed: _answerQuestion,
-                      ),
-                    ),
-                  ],
-                ))
+                Container(
+                  width: double.infinity,
+//                  margin: EdgeInsets.all(10),
+                  color: Colors.green,
+//                  padding: EdgeInsets.all(20),
+                  alignment: Alignment.bottomCenter,
+                  child: RaisedButton(
+                    child: Text("Next"),
+                    color: Colors.green,
+                    onPressed: _answerQuestion,
+                  ),
+                ),
+                Text("Time left:$counter"),
+//                Expanded(
+//
+//                    child: Row(
+//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                  crossAxisAlignment: CrossAxisAlignment.stretch,
+//                  children: [
+//                    Container(
+//                      width:double.infinity,
+//                      margin: EdgeInsets.all(10),
+//                      color: Colors.green,
+//                      padding: EdgeInsets.all(20),
+//                      alignment: Alignment.center,
+//                      child: RaisedButton(
+//
+//                        child: Text("Next"),
+//                        color: Colors.green,
+//                        onPressed: _answerQuestion,
+//                      ),
+//                    ),
+//                  ],
+//                ))
               ],
             ))
         : Container(
