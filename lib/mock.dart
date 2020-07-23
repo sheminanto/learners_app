@@ -162,61 +162,78 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
     return _index < 20 && !timeout
         ? Container(
             // color: Colors.red,
-            padding: EdgeInsets.only(top: 5),
+            // padding: EdgeInsets.only(top: 5),
             child: Column(
-              children: <Widget>[
-                ListTile(
-                  title: Text(
-                      (_index + 1).toString() +
-                          "." +
-                          english[_questionIndex[_index]].qstn,
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-                ),
-                if (english[_questionIndex[_index]].img != null)
-                  Image.asset(
-                      'assets/images/' + english[_questionIndex[_index]].img),
-                RadioListTile(
-                  title: Text(english[_questionIndex[_index]].option[0]),
-                  activeColor: Colors.red,
-                  value: 1,
-                  groupValue: selectedOption,
-                  onChanged: (val) {
-                    setSelectedOption(val);
-                  },
-                ),
-                RadioListTile(
-                  title: Text(english[_questionIndex[_index]].option[1]),
-                  activeColor: Colors.red,
-                  value: 2,
-                  groupValue: selectedOption,
-                  onChanged: (val) {
-                    setSelectedOption(val);
-                  },
-                ),
-                RadioListTile(
-                  title: Text(english[_questionIndex[_index]].option[2]),
-                  activeColor: Colors.red,
-                  value: 3,
-                  groupValue: selectedOption,
-                  onChanged: (val) {
-                    setSelectedOption(val);
-                  },
-                ),
-                Container(
-                  width: double.infinity,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(top: 5, left: 20, right: 20),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text("Score : $_totalScore",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.green)),
+                      Text("Time left   $min : $sec ",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.red))
+                    ]),
+              ),
+
+              ListTile(
+                title: Text(
+                    (_index + 1).toString() +
+                        "." +
+                        english[_questionIndex[_index]].qstn,
+                    style:
+                        TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+              ),
+              if (english[_questionIndex[_index]].img != null)
+                Image.asset(
+                    'assets/images/' + english[_questionIndex[_index]].img),
+              RadioListTile(
+                title: Text(english[_questionIndex[_index]].option[0]),
+                activeColor: Colors.red,
+                value: 1,
+                groupValue: selectedOption,
+                onChanged: (val) {
+                  setSelectedOption(val);
+                },
+              ),
+              RadioListTile(
+                title: Text(english[_questionIndex[_index]].option[1]),
+                activeColor: Colors.red,
+                value: 2,
+                groupValue: selectedOption,
+                onChanged: (val) {
+                  setSelectedOption(val);
+                },
+              ),
+              RadioListTile(
+                title: Text(english[_questionIndex[_index]].option[2]),
+                activeColor: Colors.red,
+                value: 3,
+                groupValue: selectedOption,
+                onChanged: (val) {
+                  setSelectedOption(val);
+                },
+              ),
+              Container(
+                width: double.infinity,
 //                  margin: EdgeInsets.all(10),
-                  // color: Colors.green,
+                // color: Colors.green,
 //                  padding: EdgeInsets.all(20),
-                  alignment: Alignment.bottomCenter,
-                  child: RaisedButton(
-                    child: Text("Next"),
-                    color: Colors.green,
-                    onPressed: _answerQuestion,
-                  ),
+                alignment: Alignment.bottomCenter,
+                child: RaisedButton(
+                  child: Text("Next"),
+                  color: Colors.green,
+                  onPressed: _answerQuestion,
                 ),
-                Text("Time left : $min : $sec "),
-                Text("Score : $_totalScore"),
+              ),
+
 //                Expanded(
 //
 //                    child: Row(
@@ -238,8 +255,8 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
 //                    ),
 //                  ],
 //                ))
-              ],
-            ))
+            ],
+          ))
         : Container(
             child: Center(
             child: Text(
