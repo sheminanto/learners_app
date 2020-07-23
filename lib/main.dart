@@ -3,10 +3,6 @@ import 'package:learners_app/mock.dart';
 import 'mock.dart';
 import 'questionBank.dart';
 import 'questionClass.dart';
-import 'questionClass.dart';
-import 'questions/english.dart';
-import 'questions/english.dart';
-import 'questions/english.dart';
 import 'questions/english.dart';
 import 'questions/malayalam.dart';
 import 'signs.dart';
@@ -24,17 +20,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyappState extends State<MyApp> {
-
-  List<Lang> language = [Lang("English",english),Lang("Malayalam",malayalam)];
+  List<Lang> language = [
+    Lang("English", english),
+    Lang("Malayalam", malayalam)
+  ];
   List<Question> questions = english;
   static final _myappStatekey = GlobalKey<_MyappState>();
 
-  void _language(Lang language){
+  void _language(Lang language) {
     setState(() {
       questions = language.question;
-      print("Selected lang:"+language.choice);
+      print("Selected lang:" + language.choice);
     });
   }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -46,17 +45,14 @@ class _MyappState extends State<MyApp> {
             appBar: AppBar(
               actions: <Widget>[
                 PopupMenuButton(
-                onSelected:_language,
-                  itemBuilder: (BuildContext context){
-                    return language.map((Lang language){
+                  onSelected: _language,
+                  itemBuilder: (BuildContext context) {
+                    return language.map((Lang language) {
                       return PopupMenuItem<Lang>(
-                        value: language ,
+                        value: language,
                         child: Text(language.choice),
-
                       );
                     }).toList();
-
-
                   },
                   icon: Icon(Icons.language),
                 )
@@ -82,13 +78,11 @@ class _MyappState extends State<MyApp> {
           ),
         ));
   }
-
-
 }
-class Lang{
+
+class Lang {
   final String choice;
   final List<Question> question;
 
-
-  Lang(this.choice,this.question);
+  Lang(this.choice, this.question);
 }
