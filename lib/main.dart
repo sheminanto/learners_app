@@ -16,7 +16,7 @@ void main() async {
 
     language = prefs.getString("language");
 
-    if (language.isEmpty) {
+    if (language == null) {
       _initialroute = '/initial';
     } else {
       _initialroute = '/tabs';
