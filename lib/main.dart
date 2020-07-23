@@ -9,6 +9,8 @@ import 'questions/malayalam.dart';
 
 import 'signs.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -26,8 +28,7 @@ class _MyappState extends State<MyApp> {
     Lang("English", english),
     Lang("Malayalam", malayalam)
   ];
-  List<Question> questions = malayalam;
-  static final _myappStatekey = GlobalKey<_MyappState>();
+  List<Question> questions = english;
 
   void _language(Lang language) {
     setState(() {
@@ -37,13 +38,28 @@ class _MyappState extends State<MyApp> {
     });
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    // final context = MyApp.navKey.currentState.context;
+    // _showDialog1(context);
+
+    write();
+    super.initState();
+  }
+
+  write() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("language", "english");
+    print(prefs.getString("language") + "  this is it..........");
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print("hello");
-    print(questions[0].qstn);
     return MaterialApp(
-        key: _myappStatekey,
+        debugShowCheckedModeBanner: false,
         home: DefaultTabController(
           length: 3,
           child: Scaffold(
