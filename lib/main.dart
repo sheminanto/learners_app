@@ -15,9 +15,8 @@ void main() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     language = prefs.getString("language");
-    print("this is language   --- " + language);
 
-    if (language == null) {
+    if (language.isEmpty) {
       _initialroute = '/initial';
     } else {
       _initialroute = '/tabs';

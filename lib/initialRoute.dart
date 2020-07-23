@@ -9,13 +9,14 @@ class InitialState extends State<Initial> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Text(
-          "hello",
-        ),
-      ),
-    ));
+          body: Container(
+            alignment: Alignment.center,
+            child: Text(
+              "hello",
+            ),
+          ),
+        ));
   }
 }
