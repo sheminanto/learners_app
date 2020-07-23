@@ -17,6 +17,7 @@ class Mock extends StatefulWidget {
 
 class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
   int counter;
+  int min, sec;
   int selectedOption = 0;
   int count;
   Timer _timer;
@@ -97,12 +98,14 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
 
   void _startTimer() {
     print("------------Starting Timer----------------");
-    counter = 60;
+    counter = 1200;
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         if (counter > 0) {
           counter--;
+          min = counter ~/ 60;
+          sec = counter % 60;
         } else {
           _timer.cancel();
           timeout = true;
@@ -212,7 +215,8 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
                     onPressed: _answerQuestion,
                   ),
                 ),
-                Text("Time left:$counter"),
+                Text("Time left : $min : $sec "),
+                Text("Score : $_totalScore"),
 //                Expanded(
 //
 //                    child: Row(

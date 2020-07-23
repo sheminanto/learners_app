@@ -2,10 +2,16 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'questionClass.dart';
 import 'questions/english.dart';
+import 'questions/english.dart';
+import 'questions/english.dart';
+import 'questions/malayalam.dart';
 
 
 class QuestionBank extends StatelessWidget {
+  List<Question> question = english;
+  QuestionBank(this.question);
 
 
 

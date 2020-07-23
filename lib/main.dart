@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:learners_app/mock.dart';
 import 'mock.dart';
 import 'questionBank.dart';
+import 'questionClass.dart';
+import 'questionClass.dart';
+import 'questions/english.dart';
+import 'questions/english.dart';
+import 'questions/english.dart';
+import 'questions/english.dart';
+import 'questions/malayalam.dart';
 import 'signs.dart';
 
 void main() {
@@ -17,7 +24,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyappState extends State<MyApp> {
+
+  List<Lang> language = [Lang("English",english),Lang("Malayalam",malayalam)];
+  List<Question> questions = english;
   static final _myappStatekey = GlobalKey<_MyappState>();
+
+  void _language(Lang language){
+    setState(() {
+      questions = language.question;
+      print("Selected lang:"+language.choice);
+    });
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -27,6 +44,23 @@ class _MyappState extends State<MyApp> {
           length: 3,
           child: Scaffold(
             appBar: AppBar(
+              actions: <Widget>[
+                PopupMenuButton(
+                onSelected:_language,
+                  itemBuilder: (BuildContext context){
+                    return language.map((Lang language){
+                      return PopupMenuItem<Lang>(
+                        value: language ,
+                        child: Text(language.choice),
+
+                      );
+                    }).toList();
+
+
+                  },
+                  icon: Icon(Icons.language),
+                )
+              ],
               bottom: TabBar(
                 tabs: <Widget>[
                   Tab(text: "Questions"),
@@ -40,7 +74,7 @@ class _MyappState extends State<MyApp> {
             ),
             body: TabBarView(
               children: <Widget>[
-                QuestionBank(),
+                QuestionBank(questions),
                 Signs(),
                 Mock(),
               ],
@@ -48,4 +82,13 @@ class _MyappState extends State<MyApp> {
           ),
         ));
   }
+
+
+}
+class Lang{
+  final String choice;
+  final List<Question> question;
+
+
+  Lang(this.choice,this.question);
 }

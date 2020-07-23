@@ -312,8 +312,8 @@ var english = [
   ]),
   Question("Smoking while driving public service vehicle", 0, [
     "can attract suspension of driving licence",
-    "can attract suspension of driving licence",
-    "can attract suspension of driving licence"
+    "can attract fine only",
+    "None of the above"
   ]),
   Question(
       "Abandoning vehicle in a public place causing in convenience to others or passengers",
