@@ -4,14 +4,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'questionClass.dart';
 import 'questions/english.dart';
-import 'questions/english.dart';
-import 'questions/english.dart';
 import 'questions/malayalam.dart';
 
 
 class QuestionBank extends StatelessWidget {
-  List<Question> question = english;
-  QuestionBank(this.question);
+  List<Question> question;
+  QuestionBank(this.question){
+    print(question[0].qstn);
+  }
 
 
 
@@ -22,7 +22,7 @@ class QuestionBank extends StatelessWidget {
 
     // TODO: implement build
     return ListView.builder(
-      itemCount: english.length,
+      itemCount: question.length,
       itemBuilder: (BuildContext context, int index) {
         return Card(
           shape: RoundedRectangleBorder(
@@ -35,18 +35,18 @@ class QuestionBank extends StatelessWidget {
               children: <Widget>[
                 ListTile(
                   title: Text(
-                    "${index + 1}. " + english[index].qstn,
+                    "${index + 1}. " + question[index].qstn,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),
-                if (english[index].img != null)
+                if (question[index].img != null)
                   ListTile(
                     contentPadding: EdgeInsets.only(left: 50),
-                    leading: Image.asset('assets/images/' + english[index].img),
+                    leading: Image.asset('assets/images/' + question[index].img),
                   ),
                 ListTile(
                   title: Text(
-                      "Ans. " + english[index].option[english[index].ans],
+                      "Ans. " + question[index].option[question[index].ans],
                       style:
                           TextStyle(fontStyle: FontStyle.italic, fontSize: 16)),
                 ),
