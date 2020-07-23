@@ -3,8 +3,10 @@ import 'package:learners_app/mock.dart';
 import 'mock.dart';
 import 'questionBank.dart';
 import 'questionClass.dart';
+
 import 'questions/english.dart';
 import 'questions/malayalam.dart';
+
 import 'signs.dart';
 
 void main() {
@@ -24,19 +26,22 @@ class _MyappState extends State<MyApp> {
     Lang("English", english),
     Lang("Malayalam", malayalam)
   ];
-  List<Question> questions = english;
+  List<Question> questions = malayalam;
   static final _myappStatekey = GlobalKey<_MyappState>();
 
   void _language(Lang language) {
     setState(() {
       questions = language.question;
-      print("Selected lang:" + language.choice);
+      print("Selected lang:");
+      print(language.question);
     });
   }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print("hello");
+    print(questions[0].qstn);
     return MaterialApp(
         key: _myappStatekey,
         home: DefaultTabController(
