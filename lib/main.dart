@@ -24,7 +24,7 @@ class MyApp extends StatefulWidget {
 class _MyappState extends State<MyApp> {
 
   List<Lang> language = [Lang("English",english),Lang("Malayalam",malayalam)];
-  List<Question> questions = malayalam;
+  List<Question> questions = english;
   static final _myappStatekey = GlobalKey<_MyappState>();
 
   void _language(Lang language){
