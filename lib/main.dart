@@ -1,94 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:learners_app/mock.dart';
+import 'tabs.dart';
 import 'mock.dart';
-import 'questionBank.dart';
-import 'questionClass.dart';
-import 'questionClass.dart';
-import 'questions/english.dart';
-import 'questions/malayalam.dart';
-import 'questions/malayalam.dart';
-import 'signs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'initialRoute.dart';
 
-void main() {
-  runApp(MyApp());
+String _initialroute = "/initial";
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  String language;
+
+  try {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    language = prefs.getString("language");
+
+    if (language == null) {
+      _initialroute = '/initial';
+    } else {
+      _initialroute = '/tabs';
+    }
+  } catch (e) {
+    print("error in shared preferences");
+    print(e.toString());
+  }
+
+  runApp(App());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _MyappState();
-  }
-}
-
-class _MyappState extends State<MyApp> {
-
-  List<Lang> language = [Lang("English",english),Lang("Malayalam",malayalam)];
-  List<Question> questions = english;
-  static final _myappStatekey = GlobalKey<_MyappState>();
-
-  void _language(Lang language){
-    setState(() {
-      questions = language.question;
-      print("Selected lang:");print(language.question);
-    });
-  }
-  // This widget is the root of your application.
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("hello");
-    print(questions[0].qstn);
     return MaterialApp(
-        key: _myappStatekey,
-        home: DefaultTabController(
-          length: 3,
-          child: Scaffold(
-            appBar: AppBar(
-              actions: <Widget>[
-                PopupMenuButton(
-                onSelected:_language,
-                  itemBuilder: (BuildContext context){
-                    return language.map((Lang language){
-                      return PopupMenuItem<Lang>(
-                        value: language ,
-                        child: Text(language.choice),
-
-                      );
-                    }).toList();
-
-
-                  },
-                  icon: Icon(Icons.language),
-                )
-              ],
-              bottom: TabBar(
-                tabs: <Widget>[
-                  Tab(text: "Questions"),
-                  Tab(text: "Signs"),
-                  Tab(
-                    text: "Mock",
-                  )
-                ],
-              ),
-              title: Text('Learners Guide'),
-            ),
-            body: TabBarView(
-              children: <Widget>[
-                QuestionBank(questions),
-                Signs(),
-                Mock(),
-              ],
-            ),
-          ),
-        ));
+      debugShowCheckedModeBanner: false,
+      title: 'Login App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: _initialroute,
+      routes: <String, WidgetBuilder>{
+        '/tabs': (context) => MyApp(),
+        '/mocktest': (context) => Mock(),
+        '/initial': (context) => Initial(),
+      },
+    );
   }
-
-
-}
-class Lang{
-  final String choice;
-  final List<Question> question;
-
-
-  Lang(this.choice,this.question);
 }

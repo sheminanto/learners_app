@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learners_app/questionClass.dart';
 import 'package:learners_app/questions/english.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Signs extends StatelessWidget {
   List<Question> signs;
@@ -17,8 +18,14 @@ class Signs extends StatelessWidget {
     return list;
   }
 
+  read() async {
+    final prefs = await SharedPreferences.getInstance();
+    print(prefs.getString("language"));
+  }
+
   @override
   Widget build(BuildContext context) {
+    read();
     // TODO: implement build
     signs = _getSigns();
     print(signs.length);

@@ -1,26 +1,14 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'questionClass.dart';
-import 'questions/english.dart';
-import 'questions/malayalam.dart';
-
 
 class QuestionBank extends StatelessWidget {
-  List<Question> question;
-  QuestionBank(this.question){
+  final List<Question> question;
+  QuestionBank(this.question) {
     print(question[0].qstn);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-
-
-
-    // TODO: implement build
     return ListView.builder(
       itemCount: question.length,
       itemBuilder: (BuildContext context, int index) {
@@ -42,7 +30,8 @@ class QuestionBank extends StatelessWidget {
                 if (question[index].img != null)
                   ListTile(
                     contentPadding: EdgeInsets.only(left: 50),
-                    leading: Image.asset('assets/images/' + question[index].img),
+                    leading:
+                        Image.asset('assets/images/' + question[index].img),
                   ),
                 ListTile(
                   title: Text(
