@@ -1,18 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:learners_app/main.dart';
 import 'dart:async';
 import 'dart:math';
 import 'questions/english.dart';
-import 'signs.dart';
-import 'main.dart';
 
 class Mock extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _MockState();
-  }
+  State<StatefulWidget> createState() => _MockState();
 }
 
 class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
