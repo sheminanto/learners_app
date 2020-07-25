@@ -34,6 +34,7 @@ class Signs extends StatelessWidget {
             itemCount: signs.length,
             itemBuilder: (BuildContext context, int index) {
               return Card(
+                elevation: 3,
                 child: ListTile(
                   contentPadding: EdgeInsets.all(20),
                   leading: Image.asset('assets/images/' + signs[index].img),

@@ -10,6 +10,7 @@ class Mock extends StatefulWidget {
 }
 
 class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
+  bool mock = false;
   int counter;
   int min, sec;
   int selectedOption = 0;
@@ -30,7 +31,7 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _showDialog();
+
     // tabController = TabController(vsync: this, length: 3);
 
     _generateQuestion();
@@ -39,7 +40,7 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
-    _timer.cancel();
+    if (_timer != null) _timer.cancel();
   }
 
   // void _toggleTab() {
@@ -129,16 +130,17 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
                 color: Colors.blue,
                 child: Text("Start"),
                 onPressed: () {
+                  mock = true;
                   _startTimer();
                   Navigator.of(context).pop();
                 },
               ),
+
               FlatButton(
                 color: Colors.blue,
                 child: Text("Cancel"),
                 onPressed: () {
-                  // _myappStatekey.currentState.tabController.animateTo(1);
-                  // _toggleTab();
+                  Navigator.of(context).pop();
                 },
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.30),
@@ -153,80 +155,81 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     // _showDialog(context);
     // TODO: implement build
-    return _index < 20 && !timeout
-        ? Container(
-            // color: Colors.red,
-            // padding: EdgeInsets.only(top: 5),
-            child: Column(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(top: 5, left: 20, right: 20),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text("Score : $_totalScore",
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.green)),
-                      Text("Time left   $min : $sec ",
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.red))
-                    ]),
-              ),
+    return mock == true
+        ? _index < 20 && !timeout
+            ? Container(
+                // color: Colors.red,
+                // padding: EdgeInsets.only(top: 5),
+                child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 5, left: 20, right: 20),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("Score : $_totalScore",
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.green)),
+                          Text("Time left   $min : $sec ",
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.red))
+                        ]),
+                  ),
 
-              ListTile(
-                title: Text(
-                    (_index + 1).toString() +
-                        "." +
-                        english[_questionIndex[_index]].qstn,
-                    style:
-                        TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-              ),
-              if (english[_questionIndex[_index]].img != null)
-                Image.asset(
-                    'assets/images/' + english[_questionIndex[_index]].img),
-              RadioListTile(
-                title: Text(english[_questionIndex[_index]].option[0]),
-                activeColor: Colors.red,
-                value: 1,
-                groupValue: selectedOption,
-                onChanged: (val) {
-                  setSelectedOption(val);
-                },
-              ),
-              RadioListTile(
-                title: Text(english[_questionIndex[_index]].option[1]),
-                activeColor: Colors.red,
-                value: 2,
-                groupValue: selectedOption,
-                onChanged: (val) {
-                  setSelectedOption(val);
-                },
-              ),
-              RadioListTile(
-                title: Text(english[_questionIndex[_index]].option[2]),
-                activeColor: Colors.red,
-                value: 3,
-                groupValue: selectedOption,
-                onChanged: (val) {
-                  setSelectedOption(val);
-                },
-              ),
-              Container(
-                width: double.infinity,
+                  ListTile(
+                    title: Text(
+                        (_index + 1).toString() +
+                            "." +
+                            english[_questionIndex[_index]].qstn,
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold)),
+                  ),
+                  if (english[_questionIndex[_index]].img != null)
+                    Image.asset(
+                        'assets/images/' + english[_questionIndex[_index]].img),
+                  RadioListTile(
+                    title: Text(english[_questionIndex[_index]].option[0]),
+                    activeColor: Colors.red,
+                    value: 1,
+                    groupValue: selectedOption,
+                    onChanged: (val) {
+                      setSelectedOption(val);
+                    },
+                  ),
+                  RadioListTile(
+                    title: Text(english[_questionIndex[_index]].option[1]),
+                    activeColor: Colors.red,
+                    value: 2,
+                    groupValue: selectedOption,
+                    onChanged: (val) {
+                      setSelectedOption(val);
+                    },
+                  ),
+                  RadioListTile(
+                    title: Text(english[_questionIndex[_index]].option[2]),
+                    activeColor: Colors.red,
+                    value: 3,
+                    groupValue: selectedOption,
+                    onChanged: (val) {
+                      setSelectedOption(val);
+                    },
+                  ),
+                  Container(
+                    width: double.infinity,
 //                  margin: EdgeInsets.all(10),
-                // color: Colors.green,
+                    // color: Colors.green,
 //                  padding: EdgeInsets.all(20),
-                alignment: Alignment.bottomCenter,
-                child: RaisedButton(
-                  child: Text("Next"),
-                  color: Colors.green,
-                  onPressed: _answerQuestion,
-                ),
-              ),
+                    alignment: Alignment.bottomCenter,
+                    child: RaisedButton(
+                      child: Text("Next"),
+                      color: Colors.green,
+                      onPressed: _answerQuestion,
+                    ),
+                  ),
 
 //                Expanded(
 //
@@ -249,15 +252,53 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
 //                    ),
 //                  ],
 //                ))
+                ],
+              ))
+            : Container(
+                child: Center(
+                child: Text(
+                  "Test Completed\nYour Score : $_totalScore\nStatus : " +
+                      (_totalScore < 12 ? "Failed" : "Passed"),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ))
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "Mock Test",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+//                textAlign: TextAlign.start,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(20),
+                child: Text(
+                    "Instructions:\n\n 1 : Test contains 20 questions.\n\n 2 : Total time allowed for the test is 20 minutes.\n\n 3 : After 20 minutes test will be concluded automatically.\n\n 4 : Click on 'Take Test' button to proceed further.",
+                style:TextStyle(
+
+                  fontSize: 15
+                )),
+              ),
+              Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(20),
+                child: RaisedButton(
+                  child: Text("Take Test",
+                  style: TextStyle(
+                    color: Colors.white
+                  ),),
+                  color: Colors.blue,
+                  onPressed: () {
+                    setState(() {
+                      _showDialog();
+                    });
+                  },
+                ),
+              )
             ],
-          ))
-        : Container(
-            child: Center(
-            child: Text(
-              "Test Completed\nYour Score : $_totalScore\nStatus : " +
-                  (_totalScore < 12 ? "Failed" : "Passed"),
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-          ));
+          );
   }
 }
