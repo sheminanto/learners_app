@@ -13,6 +13,7 @@ class QuestionBank extends StatelessWidget {
       itemCount: question.length,
       itemBuilder: (BuildContext context, int index) {
         return Card(
+          elevation: 3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0.0),
           ),
