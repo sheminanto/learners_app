@@ -186,7 +186,7 @@ var signs = [
       "mal": "കൊടും വളവുകൾ ഇടത്തേയ്ക്കും വലത്തേയ്ക്കും"
     },
     {"eng": "Left Side Road", "img": "r20.png", "mal": "ശാഖാ റോഡ് ഇടതുവശം"},
-    {"eng": "Right Side Road", "img": "r40.png", "mal": "ശാഖാ റോഡ് വലതുവശം"},
+    {"eng": "Right Side Road", "img": "r44.png", "mal": "ശാഖാ റോഡ് വലതുവശം"},
     {"eng": "Cross Road", "img": "r18.png", "mal": "റോഡുകൾ ക്രോസ് ചെയ്യുന്നു"},
     {
       "eng": "'T' Intersection",
@@ -221,7 +221,7 @@ var signs = [
       "img": "r89.png",
       "mal": "ശാഖാ റോഡുകൾ വലത്-ഇടത്"
     },
-    {"eng": "Loose Gravel", "img": "r54.png", "mal": "ചരൽ മണ് നിറഞ്ഞ റോഡ്"},
+    {"eng": "Loose Gravel", "img": "r54.png", "mal": "ചരൽ മണ്ണ് നിറഞ്ഞ റോഡ്"},
     {"eng": "Cycle Crossing", "img": "r55.png", "mal": "സൈക്കിൾ ക്രോസിങ്"},
     {
       "eng": "Pedestrian Crossing",
@@ -271,7 +271,7 @@ var signs = [
     },
     {
       "eng": "Unguarded Railway Crossing (100 mts)",
-      "img": "r90.png",
+      "img": "r92.png",
       "mal": "കാവൽക്കാരനും ഗേറ്റും ഇല്ലാത്ത ലെവൽ ക്രോസിങ് (100 മീറ്റർ)"
     },
     {
@@ -281,7 +281,7 @@ var signs = [
     },
     {
       "eng": "Guarded Railway Crossing (100 mts)",
-      "img": "r91.png",
+      "img": "r93.png",
       "mal": "കാവൽക്കാരനും ഗേറ്റും ഉള്ള  ലെവൽ ക്രോസിങ് (100 മീറ്റർ)"
     },
     {
@@ -295,12 +295,12 @@ var signs = [
   [
     {
       "eng": "Public Telephone",
-      "img": "r93.png",
+      "img": "r95.png",
       "mal": "ടെലിഫോൺ ബൂത്ത് മുന്നിലുണ്ട്"
     },
     {
       "eng": "Petrol Pump",
-      "img": "r94.png",
+      "img": "r96.png",
       "mal": "പെട്രോൾ പമ്പ് മുന്നിലുണ്ട്"
     },
     {"eng": "Hospital", "img": "r11.png", "mal": "ആശുപത്രി മുന്നിലുണ്ട് "},
@@ -309,8 +309,8 @@ var signs = [
       "img": "r12.png",
       "mal": "ഫസ്റ്റ് എയ്ഡ് പോസ്റ്റ് "
     },
-    {"eng": "Eating Place", "img": "r95.png", "mal": "ഭക്ഷണശാല മുന്നിലുണ്ട് "},
-    {"eng": "Light Refreshment", "img": "r96.png", "mal": "ലഘു ഭക്ഷണശാല"},
+    {"eng": "Eating Place", "img": "r97.png", "mal": "ഭക്ഷണശാല മുന്നിലുണ്ട് "},
+    {"eng": "Light Refreshment", "img": "r98.png", "mal": "ലഘു ഭക്ഷണശാല"},
     {"eng": "Resting Place", "img": "r13.png", "mal": "വിശ്രമസ്ഥലം"},
     {"eng": "No Through Side Road", "img": "r67.png", "mal": "സൈഡ് റോഡ് തടസം"},
     {"eng": "No Through Road", "img": "r68.png", "mal": "വഴി തടസം"},
@@ -327,7 +327,7 @@ var signs = [
     },
     {
       "eng": "Cycle Stand",
-      "img": "r71.png",
+      "img": "r94.png",
       "mal": "പാർക്കിംഗ് സൈക്കിളുകൾ മാത്രം"
     },
     {"eng": "Taxi Stand", "img": "r71.png", "mal": "പാർക്കിംഗ് ടാക്സി"},
