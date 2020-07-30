@@ -17,6 +17,7 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
   int count;
   Timer _timer;
   bool timeout = false;
+  final snackBar = SnackBar(content: Text('Yay! A SnackBar!'));
 
   int _totalScore = 0;
   int ans;
@@ -155,13 +156,16 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     // _showDialog(context);
     // TODO: implement build
-    return mock == true
-        ? _index < 20 && !timeout
-            ? Container(
-                // color: Colors.red,
-                // padding: EdgeInsets.only(top: 5),
-                child: Column(
-                children: <Widget>[
+    return MaterialApp(
+        home: Scaffold(
+      appBar: AppBar(
+        title: Text("Mock Test"),
+        actions: <Widget>[],
+      ),
+      body: mock == true
+          ? _index < 20 && !timeout
+              ? Container(
+                  child: Column(children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(top: 5, left: 20, right: 20),
                     child: Row(
@@ -179,50 +183,54 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
                                   color: Colors.red))
                         ]),
                   ),
-
-                  ListTile(
-                    title: Text(
-                        (_index + 1).toString() +
-                            "." +
-                            english[_questionIndex[_index]].qstn,
-                        style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold)),
-                  ),
-                  if (english[_questionIndex[_index]].img != null)
-                    Image.asset(
-                        'assets/images/' + english[_questionIndex[_index]].img),
-                  RadioListTile(
-                    title: Text(english[_questionIndex[_index]].option[0]),
-                    activeColor: Colors.red,
-                    value: 1,
-                    groupValue: selectedOption,
-                    onChanged: (val) {
-                      setSelectedOption(val);
-                    },
-                  ),
-                  RadioListTile(
-                    title: Text(english[_questionIndex[_index]].option[1]),
-                    activeColor: Colors.red,
-                    value: 2,
-                    groupValue: selectedOption,
-                    onChanged: (val) {
-                      setSelectedOption(val);
-                    },
-                  ),
-                  RadioListTile(
-                    title: Text(english[_questionIndex[_index]].option[2]),
-                    activeColor: Colors.red,
-                    value: 3,
-                    groupValue: selectedOption,
-                    onChanged: (val) {
-                      setSelectedOption(val);
-                    },
-                  ),
+                  Expanded(
+                      child: Container(
+                          // height: 500,
+                          child: Column(
+                    children: [
+                      ListTile(
+                        title: Text(
+                            (_index + 1).toString() +
+                                "." +
+                                english[_questionIndex[_index]].qstn,
+                            style: TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.bold)),
+                      ),
+                      if (english[_questionIndex[_index]].img != null)
+                        Image.asset('assets/images/' +
+                            english[_questionIndex[_index]].img),
+                      RadioListTile(
+                        title: Text(english[_questionIndex[_index]].option[0]),
+                        activeColor: Colors.red,
+                        value: 1,
+                        groupValue: selectedOption,
+                        onChanged: (val) {
+                          setSelectedOption(val);
+                        },
+                      ),
+                      RadioListTile(
+                        title: Text(english[_questionIndex[_index]].option[1]),
+                        activeColor: Colors.red,
+                        value: 2,
+                        groupValue: selectedOption,
+                        onChanged: (val) {
+                          setSelectedOption(val);
+                        },
+                      ),
+                      RadioListTile(
+                        title: Text(english[_questionIndex[_index]].option[2]),
+                        activeColor: Colors.red,
+                        value: 3,
+                        groupValue: selectedOption,
+                        onChanged: (val) {
+                          setSelectedOption(val);
+                        },
+                      ),
+                    ],
+                  ))),
                   Container(
+                    padding: EdgeInsets.all(20),
                     width: double.infinity,
-//                  margin: EdgeInsets.all(10),
-                    // color: Colors.green,
-//                  padding: EdgeInsets.all(20),
                     alignment: Alignment.bottomCenter,
                     child: RaisedButton(
                       child: Text("Next"),
@@ -230,75 +238,51 @@ class _MockState extends State<Mock> with SingleTickerProviderStateMixin {
                       onPressed: _answerQuestion,
                     ),
                   ),
-
-//                Expanded(
-//
-//                    child: Row(
-//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                  crossAxisAlignment: CrossAxisAlignment.stretch,
-//                  children: [
-//                    Container(
-//                      width:double.infinity,
-//                      margin: EdgeInsets.all(10),
-//                      color: Colors.green,
-//                      padding: EdgeInsets.all(20),
-//                      alignment: Alignment.center,
-//                      child: RaisedButton(
-//
-//                        child: Text("Next"),
-//                        color: Colors.green,
-//                        onPressed: _answerQuestion,
-//                      ),
-//                    ),
-//                  ],
-//                ))
+                ]))
+              : Container(
+                  child: Center(
+                  child: Text(
+                    "Test Completed\nYour Score : $_totalScore\nStatus : " +
+                        (_totalScore < 12 ? "Failed" : "Passed"),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                ))
+          : Align(
+              alignment: Alignment.center,
+              child: Container(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: Text("Instructions:",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: Text(
+                        " 1 : Test contains 20 questions.\n\n 2 : Total time allowed for the test is 20 minutes.\n\n 3 : After 20 minutes test will be concluded automatically.\n\n 4 : Click on 'Take Test' button to proceed further.",
+                        style: TextStyle(fontSize: 15)),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.all(20),
+                    child: RaisedButton(
+                      child: Text(
+                        "Take Test",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      color: Colors.blue,
+                      onPressed: () {
+                        setState(() {
+                          _showDialog();
+                        });
+                      },
+                    ),
+                  )
                 ],
-              ))
-            : Container(
-                child: Center(
-                child: Text(
-                  "Test Completed\nYour Score : $_totalScore\nStatus : " +
-                      (_totalScore < 12 ? "Failed" : "Passed"),
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-              ))
-        : Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "Mock Test",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-//                textAlign: TextAlign.start,
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(20),
-                child: Text(
-                    "Instructions:\n\n 1 : Test contains 20 questions.\n\n 2 : Total time allowed for the test is 20 minutes.\n\n 3 : After 20 minutes test will be concluded automatically.\n\n 4 : Click on 'Take Test' button to proceed further.",
-                style:TextStyle(
-
-                  fontSize: 15
-                )),
-              ),
-              Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(20),
-                child: RaisedButton(
-                  child: Text("Take Test",
-                  style: TextStyle(
-                    color: Colors.white
-                  ),),
-                  color: Colors.blue,
-                  onPressed: () {
-                    setState(() {
-                      _showDialog();
-                    });
-                  },
-                ),
-              )
-            ],
-          );
+              ))),
+    ));
   }
 }

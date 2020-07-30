@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'tabs.dart';
+import 'homepage.dart';
 import 'mock.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'initialRoute.dart';
@@ -19,7 +20,7 @@ void main() async {
     if (language == null) {
       _initialroute = '/initial';
     } else {
-      _initialroute = '/tabs';
+      _initialroute = '/homepage';
     }
   } catch (e) {
     print("error in shared preferences");
@@ -40,6 +41,7 @@ class App extends StatelessWidget {
       ),
       initialRoute: _initialroute,
       routes: <String, WidgetBuilder>{
+        '/homepage': (context) => Home(),
         '/tabs': (context) => MyApp(),
         '/mocktest': (context) => Mock(),
         '/initial': (context) => Initial(),

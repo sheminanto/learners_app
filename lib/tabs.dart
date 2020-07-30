@@ -24,18 +24,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyappState extends State<MyApp> {
-
   List<Lang> language = [
     Lang("English", english),
     Lang("Malayalam", malayalam)
   ];
   List<Question> questions = english;
+  String lang;
 
   void _language(Lang language) {
     setState(() {
       questions = language.question;
+      lang = language.choice;
       print("Selected lang:");
-      print(language.question);
+      print(language.choice);
     });
   }
 
@@ -52,8 +53,9 @@ class _MyappState extends State<MyApp> {
 
   write() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("language", "english");
+    prefs.setString("language", "English");
     print(prefs.getString("language") + "  this is it..........");
+    lang = prefs.getString("language");
   }
 
   // This widget is the root of your application.
@@ -62,7 +64,7 @@ class _MyappState extends State<MyApp> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: DefaultTabController(
-          length: 3,
+          length: 2,
           child: Scaffold(
             appBar: AppBar(
               actions: <Widget>[
@@ -83,9 +85,9 @@ class _MyappState extends State<MyApp> {
                 tabs: <Widget>[
                   Tab(text: "Questions"),
                   Tab(text: "Signs"),
-                  Tab(
-                    text: "Mock",
-                  )
+                  // Tab(
+                  //   text: "Mock",
+                  // )
                 ],
               ),
               title: Text('Learners Guide'),
@@ -93,8 +95,8 @@ class _MyappState extends State<MyApp> {
             body: TabBarView(
               children: <Widget>[
                 QuestionBank(questions),
-                Signs(),
-                Mock(),
+                Signs(lang),
+                // Mock(),
               ],
             ),
           ),

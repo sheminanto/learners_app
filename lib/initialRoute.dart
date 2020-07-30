@@ -13,6 +13,7 @@ class InitialState extends State<Initial> {
   void setSelection(int value) async {
     setState(() {
       selected = value;
+      done();
     });
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -33,7 +34,7 @@ class InitialState extends State<Initial> {
 
   void done() {
     if (selected != 0) {
-      Navigator.pushReplacementNamed(context, '/tabs');
+      Navigator.pushReplacementNamed(context, '/homepage');
     }
   }
 
