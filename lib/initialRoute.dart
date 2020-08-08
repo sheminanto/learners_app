@@ -13,7 +13,6 @@ class InitialState extends State<Initial> {
   void setSelection(int value) async {
     setState(() {
       selected = value;
-      done();
     });
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
